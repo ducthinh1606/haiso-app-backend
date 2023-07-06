@@ -1,15 +1,12 @@
-const express = require('express');
-const app = express();
 const port = 3000;
 
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+const fastify = require('./routes');
 
-app.use(express.json());
+fastify.listen(port, (err, address) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-
-app.listen(port, async () => {
-  console.log(`Server is listening on port ${port}`);
+  console.log(`Server is listening on ${address}`);
 });

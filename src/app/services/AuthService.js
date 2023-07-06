@@ -1,5 +1,4 @@
 const UserRepository = require("../models/repositories/UserRepository");
-const bcrypt = require("bcrypt");
 const { hash } = require("../utils/helpers")
 
 class AuthService {

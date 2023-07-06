@@ -7,22 +7,22 @@ class AuthController extends BaseController {
     super();
   }
 
-  async register(req, res) {
+  register = async (request, reply) => {
     try {
-      await registerValidation.validateAsync(req.body, { abortEarly: false })
+      await registerValidation.validateAsync(request.body, { abortEarly: false })
 
-      const { name, email, password, tel, address } = req.body;
+      const { name, email, password, tel, address } = request.body;
 
       const newUser = await AuthService.register({ name, email, password, tel, address });
 
-      return this.sendSuccessResponse(res, "Register successful", { newUser }, 201)
+      return this.sendSuccessResponse(reply, "Register successful", { newUser }, 201)
     } catch (error) {
       if (error.isJoi) {
         const validationErrors = error.details.map((detail) => detail.message);
 
-        return this.sendErrorResponse(res, "Validation failed", { validation: validationErrors }, 422)
+        return this.sendErrorResponse(reply, "Validation failed", { validation: validationErrors }, 422)
       } else {
-        return this.sendErrorResponse(res, "Unexpected error", error.message, 500)
+        return this.sendErrorResponse(reply, "Unexpected error", error.message, 500)
       }
     }
   }
