@@ -1,6 +1,13 @@
+const fastify = require('fastify')();
 const port = 3000;
 
-const fastify = require('./routes');
+const apiRoutes = [
+  { prefix: 'auth', route: require('./routes/authRoutes') },
+];
+
+apiRoutes.forEach(({ prefix, route }) => {
+  fastify.register(route, { prefix: `/api/${prefix}` });
+});
 
 fastify.listen(port, (err, address) => {
   if (err) {
