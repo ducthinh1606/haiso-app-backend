@@ -1,6 +1,7 @@
 const BaseController = require('./BaseController');
 const { registerValidation } = require('../validators/authValidator')
 const AuthService = require('../services/AuthService');
+const UserDTO = require('../models/dto/user.dto');
 
 class AuthController extends BaseController {
   constructor() {
@@ -15,7 +16,7 @@ class AuthController extends BaseController {
 
       const newUser = await AuthService.register({ name, email, password, tel, address });
 
-      return this.sendSuccessResponse(reply, "Register successful", { newUser }, 201)
+      return this.sendSuccessResponse(reply, "Register successful", UserDTO(newUser), 201)
     } catch (error) {
       if (error.isJoi) {
         const validationErrors = error.details.map((detail) => detail.message);
