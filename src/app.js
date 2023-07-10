@@ -1,4 +1,5 @@
 const fastify = require('fastify')();
+require('dotenv').config();
 const port = 3000;
 
 const apiRoutes = [

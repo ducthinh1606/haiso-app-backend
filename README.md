@@ -10,8 +10,7 @@ cp .env.example .env
 ```
 3. Config database
 ```
-- Open ./src/config/config.json
-- Edit database information
+Edit database information in .env file
 ```
 4. Create model
 ```
